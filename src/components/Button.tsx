@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import Image from 'next/image';
 
 const Button = () => {
   return (
@@ -8,7 +9,7 @@ const Button = () => {
                     // onClick={onSubmit}
                     >
       Register Now
-      <img src="/icons/rightArrow.svg" />
+      <Image src="/icons/rightArrow.svg" alt="Right Arrow"/>
     </button>
 
 

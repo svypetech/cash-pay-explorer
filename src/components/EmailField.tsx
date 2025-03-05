@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+import Image from 'next/image';
 
 const EmailField = () => {
     const [email, setEmail] = useState('');
@@ -7,7 +8,7 @@ const EmailField = () => {
     return (
         <div className='flex bg-white/10 h-16 justify-center items-center rounded-lg pl-4 my-10 mb-50 sm:mb-10 '>
             {/* Email Icon */}
-            <img src="/icons/email.svg" className='ml-2 h-7 w-8' />
+            <Image src="/icons/email.svg" alt='email' className='ml-2 h-7 w-8' />
 
             {/* Input Field */}
             <input 
@@ -23,7 +24,7 @@ const EmailField = () => {
                     transition-all duration-300 hover:blur-sm hover:bg-white hover:cursor-pointer 
                     font-poppins bg-[#143881] rounded-tr-lg rounded-br-lg">
                 Submit
-                <img src="/icons/rightArrow.svg" />
+                <Image src="/icons/rightArrow.svg" alt="right arrow"/>
             </button>
         </div>
     );
