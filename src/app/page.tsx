@@ -13,7 +13,7 @@ const LandingPage = () => {
       </div>
 
       {/* Register Page (Lower Layer) */}
-      <div className="relative z-0 w-full">
+      <div className="relative  w-full">
         <RegisterPage />
       </div>
 
