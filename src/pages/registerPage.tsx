@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import Button from '../components/Button'
 import EmailField from '../components/EmailField';
+import Image from 'next/image';
 
 const RegisterPage = () => {
   const [register, setRegister] = useState(false)
   return (
     <div
   className="w-screen min-h-screen md:min-h-5/6 bg-[url('/background.svg')] bg-no-repeat bg-top bg-cover flex flex-col items-center justify-end px-2 sm:px-20 pb-10">
-   <img src='/images/logo.svg' className='h-40'/>
+   <Image src='/images/logo.svg' alt='logo' className='h-40'/>
 
 
       {/* Heading */}
