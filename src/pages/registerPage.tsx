@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import EmailField from "../components/EmailField";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion"
 
 const RegisterPage = () => {
   const [register, setRegister] = useState(false);
@@ -26,7 +27,31 @@ const RegisterPage = () => {
         CashPay debit card. Register now for the Beta Release!
       </p>
 
-      {register ? <EmailField onClick={() => setRegister(false)} /> : <Button onClick={() => setRegister(true)} />}
+      <div>
+      <AnimatePresence mode="wait">
+        {register ? (
+          <motion.div
+            key="email"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <EmailField onClick={() => setRegister(false)} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="button"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Button onClick={() => setRegister(true)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
     </div>
   );
 };
