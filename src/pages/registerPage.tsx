@@ -18,6 +18,7 @@ const RegisterPage = () => {
         Your Finance Partner is Coming Soon
       </p>
 
+
       {/* Description */}
       <p className="font-poppins font-normal text-[18px] leading-[27px] tracking-normal text-center text-white mt-4 px-3">
         Seamlessly send, receive, deposit, withdraw, and trade crypto with ease. Convert crypto to fiat, make
