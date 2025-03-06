@@ -42,7 +42,7 @@ const EmailField: React.FC<ButtonProps> = ({ onClick }) => {
         }}
       >
         Submit
-        <Image src="/icons/rightArrow.svg" alt="Right Arrow" width={30} height={15} />
+        <Image src="/icons/rightArrow.webp" alt="Right Arrow" width={30} height={15} />
       </button>
     </div>
   );
