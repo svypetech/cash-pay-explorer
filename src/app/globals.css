@@ -6,8 +6,6 @@
 
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: 'Poppins', 'Montserrat', Arial, Helvetica, sans-serif;
 }
 
