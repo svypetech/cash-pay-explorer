@@ -8,11 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
       },
       backgroundImage: {
+        'hero': "url('/background.png')",
         "gradient-radial": 'radial-gradient(#B6B5FF, transparent)',
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
