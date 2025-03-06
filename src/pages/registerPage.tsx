@@ -20,7 +20,7 @@ const RegisterPage = () => {
 
 
       {/* Description */}
-      <p className="font-poppins font-normal text-[13px] sm:text-[18px] leading-[27px] tracking-normal text-center text-white mt-4 px-3">
+      <p className="font-poppins font-normal text-[13px] sm:text-[18px] leading-[27px] tracking-normal text-center text-white mt-4 w-320">
         Seamlessly send, receive, deposit, withdraw, and trade crypto with ease. Convert crypto to fiat, make
         international transactions, and enjoy secure P2P trading—all in one place. Even shop effortlessly with your
         CashPay debit card. Register now for the Beta Release!
