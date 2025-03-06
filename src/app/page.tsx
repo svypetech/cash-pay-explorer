@@ -8,7 +8,7 @@ const LandingPage = () => {
       
       {/* Background Image (Higher Layer) */}
       <div 
-        className="absolute inset-0 bg-[url('/bitCoin.svg')] bg-no-repeat bg-right-bottom 
+        className="absolute inset-0 bg-[url('/bitCoin.webp')] bg-no-repeat bg-right-bottom 
                    bg-[length:204px_164px] md:bg-[length:304px_264px] lg:bg-[length:404px_364px] z-10">
       </div>
 
