@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "cashpay",
+  title: "CashPay - Your Finance Partner",
   description: "cashpay landing page",
 };
 
