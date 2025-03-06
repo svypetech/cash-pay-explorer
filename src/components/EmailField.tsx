@@ -11,7 +11,7 @@ const EmailField: React.FC<ButtonProps> = ({ onClick }) => {
 
   return (
     <div 
-    className="relative z-50 flex justify-center items-center gap-x-2 bg-white/10 h-13 sm:h-16 rounded-lg cursor-pointer my-4 sm:my-10 mb-24 sm:mb-10
+    className="relative z-50 flex justify-center items-center gap-x-2 bg-white/10 h-13 sm:h-16 rounded-lg cursor-pointer my-4 sm:my-10 mb-26 sm:mb-10
                  transition-all duration-300 font-poppins">
     {/* className="relative z-50 flex bg-white/10 h-16 justify-center items-center rounded-lg pl-4 my-10 mb-50 sm:mb-10"> */}
       {/* Email Icon */}

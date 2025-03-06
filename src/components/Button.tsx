@@ -9,7 +9,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({ onClick }) => {
   return (
     <button
-      className="relative z-50 flex justify-center items-center gap-x-2 p-2 sm:p-4 px-6 border border-white rounded-lg cursor-pointer my-4 sm:my-10 mb-24 sm:mb-10
+      className="relative z-50 flex justify-center items-center gap-x-2 p-2 sm:p-4 px-6 border border-white rounded-lg cursor-pointer my-4 sm:my-10 mb-26 sm:mb-10
                  transition-all duration-300 hover:border-black hover:bg-[#000A1D] font-poppins text-[16px]"
       onClick={onClick}
     >
