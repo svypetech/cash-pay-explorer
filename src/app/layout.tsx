@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "CashPay - Your Finance Partner",
-  description: "cashpay landing page",
+  description: "Your Finance Partner is Coming Soon.",
 };
 
 export default function RootLayout({
