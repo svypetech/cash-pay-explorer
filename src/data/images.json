@@ -1,0 +1,16 @@
+{
+    "searchIconLight":"/icons/searchLight.svg",
+    "searchIconDark":"/icons/searchDark.svg",
+    "blockIconLight":"/icons/blockIconLight.svg",
+    "blockIconDark":"/icons/blockIconDark.svg",
+    "transactionIconLight":"/icons/transactionIconLight.svg",
+    "transactionIconDark":"icons/transactionIconDark.svg",
+    "leftArrowLight":"icons/arrow-left.svg",
+    "rightArrowLight":"icons/arrow-right.svg",
+    "leftArrowDark":"icons/arrow-leftDark.svg",
+    "rightArrowDark":"icons/arrow-rightDark.svg",
+    "headerLight":"icons/header.svg",
+    "headerDark":"icons/headerIcondark.svg",
+    "cancelLight":"icons/cancelLight.svg",
+    "cancelDark":"icons/cancelDark.svg"
+}
