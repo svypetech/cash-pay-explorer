@@ -29,7 +29,19 @@ const Transactions = () => {
       transactionHash: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688", blockNo: "8423003",
       time: "2h ago", fromAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
       toAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
+      status: "Pending"
+    },
+    {
+      transactionHash: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688", blockNo: "8423003",
+      time: "2h ago", fromAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
+      toAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
       status: "Success"
+    },
+    {
+      transactionHash: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688", blockNo: "8423003",
+      time: "2h ago", fromAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
+      toAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
+      status: "Pending"
     },
     {
       transactionHash: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688", blockNo: "8423003",

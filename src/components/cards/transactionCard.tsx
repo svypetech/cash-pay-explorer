@@ -74,7 +74,13 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ transactionHash, bloc
         {/* Status Buttons */}
         <div className="flex sm:justify-center items-center gap-x-4 p-4">
           <button className="p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-green text-green2 font-semibold">IN</button>
-          <button className="p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-green text-green2 font-semibold">{status}</button>
+          {status === "Success" ? (
+            <button className="p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-green text-green2 font-semibold">{status}</button>
+          ) : (
+            <button className="p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-secondary2 text-skyblue font-semibold">{status}</button>
+          )  
+          }
+          {/* <button className="p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-green text-green2 font-semibold">{status}</button> */}
         </div>
       </div>
     </div>

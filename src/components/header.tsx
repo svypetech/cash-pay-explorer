@@ -20,7 +20,8 @@ const Header: React.FC = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setShowDropdown(false);
+        // Delay to let the onClick event finish first
+        setTimeout(() => setShowDropdown(false), 0);
       }
     };
 
@@ -29,6 +30,7 @@ const Header: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
 
   useEffect(() => {
     if (darkMode === null) return; // Prevent running before darkMode is loaded
@@ -76,7 +78,7 @@ const Header: React.FC = () => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="sm:hidden flex flex-col justify-center"
             >
-              {Array.isArray(data) &&
+              {/* {Array.isArray(data) &&
             data.map((val, ind) => (
               <Link href={val.route} key={ind}
               onClick={() => setShowHeader(prev => !prev)}>
@@ -93,8 +95,8 @@ const Header: React.FC = () => {
                   />
                 </div>
               </Link>
-            ))}
-              {/* {Array.isArray(data) &&
+            ))} */}
+              {Array.isArray(data) &&
                 data.map((val, ind) => (
                   <div key={ind} className="relative">
                     {val.dropdown ? (
@@ -120,16 +122,16 @@ const Header: React.FC = () => {
                         {showDropdown && val.dropdown && (
                           <div
                             ref={dropdownRef}
-                            className="absolute w-full top-full left-0 mt-1 bg-black border border-gray-200 rounded-md shadow-lg z-10"
+                            className={`absolute top-full left-0 mt-1 w-full ${darkMode ? "bg-darkBg hover:" : "bg-white"} border border-gray-200 rounded-md shadow-lg z-10`}
                           >
                             {val.dropdown.map((item: any, i: number) => (
                               <button
                                 key={i}
                                 type="button"
                                 onClick={() => {
-                                  setShowHeader(prev => !prev);
-                                  // @ts-ignore
-                                  router.push(item.route || "");
+                                  setShowDropdown(!showDropdown)
+                                  setShowHeader(prev => !prev)
+                                  if (item.route) router.push(item.route); 
                                 }}
                                 className="w-full text-left px-4 py-2 text-sm cursor-pointer hover:scale-105"
                               >
@@ -140,7 +142,8 @@ const Header: React.FC = () => {
                         )}
                       </>
                     ) : (
-                      <Link href={val.route} onClick={() => setShowHeader(prev => !prev)}>
+                      <Link href={val.route} key={ind}
+                        onClick={() => setShowHeader(prev => !prev)}>
                         <div className="flex justify-between items-center cursor-pointer hover:bg-secondary/20 p-4 rounded-lg">
                           <div className="flex gap-x-2 items-center cursor-pointer">
                             <span>{parse(darkMode ? val.iconDark : val.iconLight)}</span>
@@ -156,7 +159,7 @@ const Header: React.FC = () => {
                       </Link>
                     )}
                   </div>
-                ))} */}
+                ))}
 
               {/* Dark Mode Toggle */}
               <button
@@ -179,7 +182,7 @@ const Header: React.FC = () => {
       {/* for web */}
       {/* Navigation */}
       <div className="hidden sm:flex gap-x-4 md:gap-x-8 items-center">
-        {Array.isArray(data) &&
+        {/* {Array.isArray(data) &&
           data.map((val, ind) => (
             <Link href={val.route} key={ind}>
               <div className="flex gap-x-2 items-center cursor-pointer">
@@ -187,7 +190,57 @@ const Header: React.FC = () => {
                 <p className="font-satoshi font-bold text-sm md:text-base">{val.name}</p>
               </div>
             </Link>
+          ))} */}
+        {Array.isArray(data) &&
+          data.map((val, ind) => (
+            <div key={ind} className="relative">
+              {val.name === "APIs" ? (
+                <>
+                  <div
+                    onClick={() => {
+                      setShowDropdown((prev) => !prev);
+                    }}
+                    className="flex justify-between items-center cursor-pointer rounded-lg"
+                  >
+                    <div className="flex gap-x-2 items-center cursor-pointer">
+                      <span>{parse(darkMode ? val.iconDark : val.iconLight)}</span>
+                      <p className="font-satoshi font-bold text-sm md:text-base">{val.name}</p>
+                    </div>
+                  </div>
+
+                  {showDropdown && val.dropdown && (
+                    <div
+                      ref={dropdownRef}
+                      className={`absolute top-full left-0 mt-3 w-32 ${darkMode ? "bg-darkBg hover:" : "bg-white"} border border-gray-200 rounded-md shadow-lg z-10`}
+                    >
+                      {val.dropdown.map((item: any, i: number) => (
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => {
+                            setShowDropdown(!showDropdown)
+                            if (item.route) router.push(item.route); // Fixed routing issue
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm cursor-pointer hover:scale-105"
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link href={val.route} key={ind}>
+                  <div className="flex gap-x-2 items-center cursor-pointer">
+                    <span>{parse(darkMode ? val.iconDark : val.iconLight)}</span>
+                    <p className="font-satoshi font-bold text-sm md:text-base">{val.name}</p>
+                  </div>
+                </Link>
+              )}
+            </div>
           ))}
+
+
 
         {/* Dark Mode Toggle */}
         <button onClick={toggleDarkMode} className="focus:outline-none cursor-pointer">
