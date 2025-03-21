@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useDarkMode } from "../../context/DarkModeContext";
 import GraphQLComponent from '@/src/components/cards/graphqlCard';
 import ETH_RPC_Block from '@/src/components/cards/rpcCard';
 import AccountEndpoints from '@/src/components/cards/accountEndpoints';
 import ApiOverview from '@/src/components/cards/apiOverview';
-import { useDarkMode } from '../context/DarkModeContext';
 
 const page = () => {
   const { darkMode } = useDarkMode()

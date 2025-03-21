@@ -14,13 +14,14 @@
   --color-darkBg: #1E1E1E;
   --color-secondary: #27AAE1;
   --color-secondary2: #27AAE11A;
-  --color-textLight: #1D1D1D;
+  --color-textLight: #1D1D1D; 
   --color-gray: #4D4C4C;
   --color-gray2: #333333;
   --color-green: #71FB5514;
+  --color-skyblue: #27AAE1;
   --color-green2: #20C000;
   --color-darkText: #B3B3B3
-  --color-borderDark: #848484
+  --color-borderDark: #848484;
 }
 
 /* 
