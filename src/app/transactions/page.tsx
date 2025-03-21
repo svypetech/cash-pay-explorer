@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { useDarkMode } from "../context/DarkModeContext";
 import TransactionCard from "../../components/cards/transactionCard";
-import Link from "next/link";
 import Pagination from "@/src/components/pagination/pagination";
 
 
@@ -10,8 +9,7 @@ const Transactions = () => {
   const { darkMode } = useDarkMode(); // Get dark mode state
   const [showDark, setShowDark] = useState(darkMode);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(5);
-  const limit = 6; // Items per page
+  const [totalPages] = useState(5);
 
 
   useEffect(() => {

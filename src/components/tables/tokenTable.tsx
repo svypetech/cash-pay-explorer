@@ -1,7 +1,5 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import images from "../../data/images.json"
-import Image from "next/image";
 import { useDarkMode } from "../../app/context/DarkModeContext";
 
 

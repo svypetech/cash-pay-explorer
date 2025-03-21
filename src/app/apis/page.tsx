@@ -1,4 +1,5 @@
 'use client'
+<<<<<<< HEAD
 
 import React, { useEffect, useState } from 'react'
 import GraphQLComponent from '@/src/components/cards/graphqlCard';
@@ -22,6 +23,11 @@ const page = () => {
     const timeout = setTimeout(() => setShowDark(darkMode), 100);
     return () => clearTimeout(timeout);
   }, [darkMode]);
+=======
+import React from 'react'
+
+const page = () => {
+>>>>>>> 30304b3756cb2128c353d3f3fde95594b9f1775a
 
   return (
     <div className="flex flex-col gap-5 font-satoshi">
