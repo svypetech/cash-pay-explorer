@@ -32,15 +32,15 @@
         "dropdown": [
             {
                 "name": "GraphQL",
-                "route": "/apis/graphql"
+                "route": "/graphql"
             },
             {
                 "name": "RPC",
-                "route": "/apis/rpc"
+                "route": "/rpc"
             },
             {
                 "name": "Eth RPC",
-                "route": "/apis/ethrpc"
+                "route": "/ethrpc"
             }
         ]
       }

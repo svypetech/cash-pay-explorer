@@ -1,8 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { useDarkMode } from "../../context/DarkModeContext";
-import GraphQLComponent from '@/src/components/cards/graphqlCard';
+import { useDarkMode } from "../context/DarkModeContext";
 import ETH_RPC_Block from '@/src/components/cards/rpcCard';
 import AccountEndpoints from '@/src/components/cards/accountEndpoints';
 import ApiOverview from '@/src/components/cards/apiOverview';
@@ -25,10 +24,8 @@ const page = () => {
 
   return (
     <div className="flex flex-col gap-5 font-satoshi">
-      {/* <ApiOverview showDark={showDark} /> */}
-      {/* <AccountEndpoints showDark={showDark} /> */}
-      {/* <ETH_RPC_Block /> */}
-      <GraphQLComponent />
+      <ApiOverview showDark={showDark} />
+      <AccountEndpoints showDark={showDark} />
     </div>
   )
 }

@@ -1,5 +1,4 @@
 'use client'
-<<<<<<< HEAD
 
 import React, { useEffect, useState } from 'react'
 import GraphQLComponent from '@/src/components/cards/graphqlCard';
@@ -11,23 +10,12 @@ import { useDarkMode } from '../context/DarkModeContext';
 const page = () => {
   const { darkMode } = useDarkMode()
   const [showDark, setShowDark] = useState(darkMode)
-  // const [queryArray, setQueryArray] = useState([{
-  //   name: "",
-  //   url: "",
-  //   WsUrl: "",
-  //   headers: []
-  // }])
 
   useEffect(() => {
     // Delay state update slightly to enable smooth transition
     const timeout = setTimeout(() => setShowDark(darkMode), 100);
     return () => clearTimeout(timeout);
   }, [darkMode]);
-=======
-import React from 'react'
-
-const page = () => {
->>>>>>> 30304b3756cb2128c353d3f3fde95594b9f1775a
 
   return (
     <div className="flex flex-col gap-5 font-satoshi">
