@@ -14,7 +14,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
 // Separate component to use the context
 function LayoutContent({ children }: { children: React.ReactNode }) {
-  const { darkMode, setDarkMode } = useDarkMode(); // Get dark mode state
+  const { darkMode } = useDarkMode(); // Get dark mode state
 
   return (
     <div

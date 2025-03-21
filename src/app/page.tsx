@@ -3,7 +3,6 @@ import Topcards from "../components/home/topcards";
 import SearchField from "../components/home/searchField";
 import Blocks from "../components/home/blocks";
 import Transactions from "../components/home/transactions";
-import { useDarkMode } from "./context/DarkModeContext";
 import { useState } from "react";
 
 export default function Page() {

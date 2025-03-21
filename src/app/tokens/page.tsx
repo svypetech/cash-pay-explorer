@@ -10,9 +10,8 @@ const Page = () => {
   const { darkMode } = useDarkMode(); // Get dark mode state
   const [showDark, setShowDark] = useState(darkMode);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(5);
+  const [totalPages] = useState(5);
   const [search, setSearch] = useState('')
-  const limit = 6; // Items per page
 
 
   useEffect(() => {
