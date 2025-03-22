@@ -19,19 +19,33 @@ const Header: React.FC = () => {
   const transactionDropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-  //       // Delay to let the onClick event finish first
-  //       setTimeout(() => setShowDropdown(false), 0);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        // Delay to let the onClick event finish first
+        setTimeout(() => setShowDropdown(false), 0);
+      }
+    };
 
-  //   document.addEventListener('mousedown', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, []);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (transactionDropdownRef.current && !transactionDropdownRef.current.contains(event.target as Node)) {
+        // Delay to let the onClick event finish first
+        setTimeout(() => setShowTransactionDropdown(false), 0);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
 
   useEffect(() => {
