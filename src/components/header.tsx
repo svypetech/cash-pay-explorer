@@ -101,7 +101,7 @@ const Header: React.FC = () => {
                       <>
                         <button
                           onClick={() => {
-                            setShowDropdown(prev => !prev)
+                            { val.name === "APIs" ? setShowDropdown((prev) => !prev) : setShowTransactionDropdown((prev) => !prev) }
                           }}
                           className="w-full flex justify-between items-center cursor-pointer hover:bg-secondary/20 p-4 rounded-lg"
                         >
@@ -117,9 +117,9 @@ const Header: React.FC = () => {
                           />
                         </button>
 
-                        {showDropdown && val.dropdown && (
+                        {(val.name === "APIs" ? showDropdown : showTransactionDropdown) && val.dropdown && (
                           <div
-                            ref={dropdownRef}
+                            ref={val.name === "APIs" ? dropdownRef : transactionDropdownRef}
                             className={`absolute top-full left-0 mt-1 w-full ${darkMode ? "bg-darkBg hover:" : "bg-white"} border border-gray-200 rounded-md shadow-lg z-10`}
                           >
                             {val.dropdown.map((item: any, i: number) => (
@@ -127,7 +127,7 @@ const Header: React.FC = () => {
                                 key={i}
                                 type="button"
                                 onClick={() => {
-                                  setShowDropdown(!showDropdown)
+                                  val.name === "APIs" ? setShowDropdown(!showDropdown) : setShowTransactionDropdown(!showTransactionDropdown)
                                   setShowHeader(prev => !prev)
                                   if (item.route) router.push(item.route);
                                 }}
