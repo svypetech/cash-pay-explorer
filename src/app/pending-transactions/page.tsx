@@ -23,25 +23,25 @@ const Transactions = () => {
       transactionHash: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688", blockNo: "8423003",
       time: "2h ago", fromAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
       toAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
-      status: "Success"
+      status: "Pending"
     },
     {
       transactionHash: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688", blockNo: "8423003",
       time: "2h ago", fromAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
       toAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
-      status: "Success"
+      status: "Pending"
     },
     {
       transactionHash: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688", blockNo: "8423003",
       time: "2h ago", fromAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
       toAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
-      status: "Success"
+      status: "Pending"
     },
     {
       transactionHash: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688", blockNo: "8423003",
       time: "2h ago", fromAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
       toAddress: "0x90afca66271006d5e6f3b9dc1bd1a75d1f6ae2287544a0d4ef3b8145caf7f688",
-      status: "Success"
+      status: "Pending"
     },
   ];
 
@@ -49,7 +49,7 @@ const Transactions = () => {
     <div className="pb-10 p-6 sm:p-8 md:p-10 lg-20">
       <div className={`flex flex-col p-4 sm:p-8 rounded-lg ${showDark ? "bg-darkBg" : "border-black/20 border-1 bg-white"}`}>
         <div className="flex gap-x-2 w-full justify-between items-center">
-          <p className="flex-1 font-satoshi text-[20px] md:text-[40px] ">Validated Transactions</p>
+          <p className="flex-1 font-satoshi text-[20px] md:text-[40px] ">Pending Transactions</p>
           <Pagination  currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
     
         </div>

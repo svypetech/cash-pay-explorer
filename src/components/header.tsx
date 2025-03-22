@@ -14,22 +14,24 @@ const Header: React.FC = () => {
   const { darkMode, setDarkMode } = useDarkMode(); // Get dark mode state from context
   const [showHeader, setShowHeader] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
+  const [showTransactionDropdown, setShowTransactionDropdown] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const transactionDropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        // Delay to let the onClick event finish first
-        setTimeout(() => setShowDropdown(false), 0);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+  //       // Delay to let the onClick event finish first
+  //       setTimeout(() => setShowDropdown(false), 0);
+  //     }
+  //   };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, []);
 
 
   useEffect(() => {
@@ -78,24 +80,6 @@ const Header: React.FC = () => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="sm:hidden flex flex-col justify-center"
             >
-              {/* {Array.isArray(data) &&
-            data.map((val, ind) => (
-              <Link href={val.route} key={ind}
-              onClick={() => setShowHeader(prev => !prev)}>
-                <div className="flex justify-between items-center cursor-pointer hover:bg-secondary/20 p-4 rounded-lg">
-                  <div className="flex gap-x-2 items-center cursor-pointer">
-                    <span>{parse(darkMode ? val.iconDark : val.iconLight)}</span>
-                    <p className="font-satoshi font-bold text-sm md:text-base">{val.name}</p>
-                  </div>
-                  <Image
-                    src={darkMode ? images.rightArrowDark : images.rightArrowLight}
-                    alt="logo"
-                    height={24}
-                    width={24}
-                  />
-                </div>
-              </Link>
-            ))} */}
               {Array.isArray(data) &&
                 data.map((val, ind) => (
                   <div key={ind} className="relative">
@@ -131,7 +115,7 @@ const Header: React.FC = () => {
                                 onClick={() => {
                                   setShowDropdown(!showDropdown)
                                   setShowHeader(prev => !prev)
-                                  if (item.route) router.push(item.route); 
+                                  if (item.route) router.push(item.route);
                                 }}
                                 className="w-full text-left px-4 py-2 text-sm cursor-pointer hover:scale-105"
                               >
@@ -182,23 +166,14 @@ const Header: React.FC = () => {
       {/* for web */}
       {/* Navigation */}
       <div className="hidden sm:flex gap-x-4 md:gap-x-8 items-center">
-        {/* {Array.isArray(data) &&
-          data.map((val, ind) => (
-            <Link href={val.route} key={ind}>
-              <div className="flex gap-x-2 items-center cursor-pointer">
-                <span>{parse(darkMode ? val.iconDark : val.iconLight)}</span>
-                <p className="font-satoshi font-bold text-sm md:text-base">{val.name}</p>
-              </div>
-            </Link>
-          ))} */}
         {Array.isArray(data) &&
           data.map((val, ind) => (
             <div key={ind} className="relative">
-              {val.name === "APIs" ? (
+              {val.dropdown ? (
                 <>
                   <div
                     onClick={() => {
-                      setShowDropdown((prev) => !prev);
+                      val.name === "APIs" ? setShowDropdown((prev) => !prev): setShowTransactionDropdown((prev) => !prev)
                     }}
                     className="flex justify-between items-center cursor-pointer rounded-lg"
                   >
@@ -208,9 +183,9 @@ const Header: React.FC = () => {
                     </div>
                   </div>
 
-                  {showDropdown && val.dropdown && (
+                  {(val.name === "APIs" ? showDropdown : showTransactionDropdown) && val.dropdown && (
                     <div
-                      ref={dropdownRef}
+                      ref={val.name === "APIs" ? dropdownRef : transactionDropdownRef}
                       className={`absolute top-full left-0 mt-3 w-32 ${darkMode ? "bg-darkBg hover:" : "bg-white"} border border-gray-200 rounded-md shadow-lg z-10`}
                     >
                       {val.dropdown.map((item: any, i: number) => (
@@ -218,7 +193,7 @@ const Header: React.FC = () => {
                           key={i}
                           type="button"
                           onClick={() => {
-                            setShowDropdown(!showDropdown)
+                            val.name === "APIs" ? setShowDropdown(!showDropdown) : setShowTransactionDropdown(!showTransactionDropdown)
                             if (item.route) router.push(item.route); // Fixed routing issue
                           }}
                           className="w-full text-left px-4 py-2 text-sm cursor-pointer hover:scale-105"
