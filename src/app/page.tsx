@@ -5,6 +5,7 @@ import Blocks from "../components/home/blocks";
 import Transactions from "../components/home/transactions";
 import { useState } from "react";
 
+
 export default function Page() {
   // const { darkMode } = useDarkMode(); // Get darkMode from context
   const [search, setSearch] = useState('')

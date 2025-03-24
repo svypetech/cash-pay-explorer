@@ -21,14 +21,14 @@ const Page = () => {
   }, [darkMode]);
 
   const tokens = [
-    { name: "MLXC Frozen (MLXC-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 MLXC-FRZN", holderCount: "460" },
-    { name: "MLXC Frozen (MLXC-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 MLXC-FRZN", holderCount: "460" },
-    { name: "MLXC Frozen (MLXC-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 MLXC-FRZN", holderCount: "460" },
-    { name: "MLXC Frozen (MLXC-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 MLXC-FRZN", holderCount: "460" },
-    { name: "MLXC Frozen (MLXC-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 MLXC-FRZN", holderCount: "460" },
-    { name: "MLXC Frozen (MLXC-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 MLXC-FRZN", holderCount: "460" },
-    { name: "MLXC Frozen (MLXC-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 MLXC-FRZN", holderCount: "460" },
-    { name: "MLXC Frozen (MLXC-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 MLXC-FRZN", holderCount: "460" },
+    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
+    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
+    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
+    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
+    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
+    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
+    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
+    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
   ];
 
   return (
