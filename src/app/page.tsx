@@ -3,12 +3,42 @@ import Topcards from "../components/home/topcards";
 import SearchField from "../components/home/searchField";
 import Blocks from "../components/home/blocks";
 import Transactions from "../components/home/transactions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 export default function Page() {
   // const { darkMode } = useDarkMode(); // Get darkMode from context
   const [search, setSearch] = useState('')
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  
+  //     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjQ2ZTdjOWYxNDI3ODE5NTI2OWYxOSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM5ODc4MDEyLCJleHAiOjE3NDI0NzAwMTJ9.9CSpoEdOI0l48ltYSzFZTdIJVcok-NcfY4f6PbH3o7Y'
+  //     const baseURL = 'https://api.cashpay.co'
+  //     // send along with an authorizaztion token which has beared token
+  //     async function fetchData() {
+  //       try {
+  //         const response = await axios.get(
+  //           `${baseURL}/explorer/dashboardStats`,
+  //           {
+  //             headers: {
+  //               Authorization: `Bearer ${token}`,
+  //             },
+  //           }
+  //         );
+  //         console.log(`Fetched data: `, response.data);
+  
+          
+  //       } catch (error) {
+  //         console.error("Failed to fetch blocks:", error);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     }
+  
+  //     fetchData();
+  //   }, [])
 
   const topCards = [
     { name: "Average block time", number: "10 seconds" },
