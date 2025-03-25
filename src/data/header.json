@@ -41,10 +41,6 @@
         "route": "/apis",
         "dropdown": [
             {
-                "name": "GraphQL",
-                "route": "/graphql"
-            },
-            {
                 "name": "RPC",
                 "route": "/rpc"
             },

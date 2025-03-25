@@ -5,7 +5,7 @@ import TokenTable from "../../components/tables/tokenTable";
 import Pagination from "@/src/components/pagination/pagination";
 import images from "../../data/images.json"
 import Image from "next/image";
-import axios from "axios";
+// import axios from "axios";
 
 interface Token {
   name: string;
