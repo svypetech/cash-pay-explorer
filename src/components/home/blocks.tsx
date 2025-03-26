@@ -3,18 +3,16 @@ import React, { useEffect, useState } from "react";
 import { useDarkMode } from "../../app/context/DarkModeContext";
 import BlockCard from "../cards/blockCard";
 import Link from "next/link";
-
-interface Blocks {
-    blockNo: string;
-    noOfTransactions: string;
-    endTime: string
-}
+import { Block, getTimeAgo } from "@/src/types/types";
+import { formatDistanceToNow } from "date-fns";
+import BlockCardSkeleton from "../skeletons/block";
 
 interface BlocksProps {
-    blocks: Blocks[];
+    blocks: Block[];
+    loading: boolean;
 }
 
-const Blocks: React.FC<BlocksProps> = ({ blocks }) => {
+const Blocks: React.FC<BlocksProps> = ({ blocks, loading }) => {
     const { darkMode } = useDarkMode(); // Get dark mode state
     const [showDark, setShowDark] = useState(darkMode);
 
@@ -39,9 +37,15 @@ const Blocks: React.FC<BlocksProps> = ({ blocks }) => {
                 </div>
                 <div className="flex items-center flex-wrap justify-between my-4 gap-4">
                     {
-                        blocks.map((val, ind) => {
-                            return <BlockCard  key={ind} blockNo={val.blockNo} noOfTransactions={val.noOfTransactions} endTime={val.endTime} />
-                        })
+                        loading ?
+                            <div className="flex items-center flex-wrap justify-between my-4 gap-2">
+                                {Array.from({ length: 4 }).map((_, index) => (
+                                <BlockCardSkeleton key={index} />
+                                ))}
+                            </div> :
+                            blocks.map((val, ind) => { // @ts-ignore
+                                return <BlockCard key={ind} blockNo={val.number} noOfTransactions={val.transactions.length.toString()} endTime={getTimeAgo(val.timestamp)} size={val.size} gasLimit={val.gasLimit} gasUsed={val.gasUsed} />
+                            })
                     }
                 </div>
             </div>

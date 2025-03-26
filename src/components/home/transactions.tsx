@@ -3,21 +3,15 @@ import React, { useEffect, useState } from "react";
 import { useDarkMode } from "../../app/context/DarkModeContext";
 import TransactionCard from "../cards/transactionCard";
 import Link from "next/link";
-
-interface Transactions {
-    transactionHash: string;
-    blockNo: string;
-    time: string;
-    fromAddress: string;
-    toAddress: string;
-    status:string
-}
+import { Transaction } from "@/src/types/types";
+import TransactionCardSkeleton from "../skeletons/transaction";
 
 interface TransactionsProps {
-    transactions: Transactions[];
+    transactions: Transaction[];
+    loading: boolean;
 }
 
-const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
+const Transactions: React.FC<TransactionsProps> = ({ transactions, loading }) => {
     const { darkMode } = useDarkMode(); // Get dark mode state
     const [showDark, setShowDark] = useState(darkMode);
 
@@ -42,8 +36,12 @@ const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
                 </div>
                 <div className="flex flex-col gap-x-1 sm:gap-x-3 justify-center my-4">
                 {
-                    transactions.map((val,ind) => {
-                        return <TransactionCard key={ind} transactionHash={val.transactionHash} blockNo={val.blockNo} time={val.time} fromAddress={val.fromAddress} toAddress={val.toAddress} status={val.status} />
+                    loading ? 
+                    Array.from({length: 4}).map((_,ind) => {
+                        return <TransactionCardSkeleton key={ind} />
+                    })
+                    : transactions.map((val,ind) => {
+                        return <TransactionCard key={ind} transactionHash={val.hash} blockNo={val.blockNumber} time={val.timeStamp} fromAddress={val.from} toAddress={val.to} status={"Success"} />
                     })
                 }
                 </div>
