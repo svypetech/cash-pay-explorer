@@ -95,7 +95,7 @@ export function useFetchPendingTransactions(page: number, limit: number) {
   return { transactions, totalPages, loading };
 }
 
-export function fetchDashboardTransactions() {
+export function useFetchDashboardTransactions() {
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

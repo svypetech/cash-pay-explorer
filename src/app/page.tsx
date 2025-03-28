@@ -5,14 +5,14 @@ import Blocks from "../components/home/blocks";
 import Transactions from "../components/home/transactions";
 import { useState } from "react";
 import useFetchBlocks from "../hooks/blocks";
-import useFetchTransactions from "../hooks/transactions";
+import useFetchTransactions, { useFetchDashboardTransactions } from "../hooks/transactions";
 import useFetchDashboardStats from "../hooks/dashboardStats";
 
 
 export default function Page() {
   const [search, setSearch] = useState('')
   const { blocks, loading } = useFetchBlocks(1, 4);
-  const { transactions, loading: loading2 } = useFetchTransactions(1, 4); // @
+  const { transactions, loading: loading2 } = useFetchDashboardTransactions(); 
   const { data , loading: loading3 } = useFetchDashboardStats();
 
   return (
