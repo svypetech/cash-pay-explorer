@@ -31,8 +31,7 @@ const Transactions = () => {
   const [showDark, setShowDark] = useState(darkMode);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(5);
-  const { transactions, totalPages: pages, loading } = useFetchTransactions(currentPage, 10);
-  // const { transactions, totalPages: pages, loading } = useFetchPendingTransactions(currentPage, 10);
+  const { transactions, totalPages: pages, loading } = useFetchPendingTransactions(currentPage, 10);
 
   useEffect(() => {
     if (pages) {

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { TopCard } from '../components/home/topcards';
 
-const useFetchDashboardStats = (page: number, limit: number) => {
+const useFetchDashboardStats = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<TopCard>();
 
   useEffect(() => {
     async function fetchData() {
@@ -20,7 +21,7 @@ const useFetchDashboardStats = (page: number, limit: number) => {
         
 
     fetchData();
-  }, [page]);
+  }, []);
 
   return { data, loading };
 };

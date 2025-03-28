@@ -47,7 +47,7 @@ const Footer = () => {
                 <Image src="/images/whiteLogo.svg" alt="logo" width={497} height={112} />
                 <div className='flex flex-col gap-y-4 sm:gap-y-8 pl-2 sm:pl-8 '>
                     <p className="font-poppins text-[16px] sm:text-[20] max-w-lg">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Cashpay makes money transfers effortless—fast, secure, and hassle-free. Send and receive funds instantly, anytime, anywhere!
                     </p>
                     <div className='flex gap-x-2 sm:gap-x-8 items-center'>
                         {Array.isArray(data) &&
