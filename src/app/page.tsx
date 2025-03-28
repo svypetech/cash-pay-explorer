@@ -5,7 +5,7 @@ import Blocks from "../components/home/blocks";
 import Transactions from "../components/home/transactions";
 import { useState } from "react";
 import useFetchBlocks from "../hooks/blocks";
-import useFetchTransactions, { useFetchDashboardTransactions } from "../hooks/transactions";
+import { useFetchDashboardTransactions } from "../hooks/transactions";
 import useFetchDashboardStats from "../hooks/dashboardStats";
 
 

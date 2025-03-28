@@ -14,6 +14,20 @@ export interface TopCardsProps {
   loading: boolean;
 }
 
+function formatNumber(num: number | string): string {
+  const number = typeof num === "string" ? parseFloat(num) : num;
+
+  if (Math.abs(number) < 1000) {
+    return number.toString();
+  }
+
+  const exponent = Math.floor(Math.log10(Math.abs(number)));
+  const value = (number / Math.pow(10, exponent)).toFixed(2);
+
+  // Format as scientific notation
+  return `${value} × 10^${exponent}`;
+}
+
 
 const mockTopCards = [
     { name: "Average block time", number: "0 seconds" },
@@ -29,7 +43,7 @@ const Topcards: React.FC<TopCardsProps> = ({ data, loading }) => {
   const topCards = [
     { name: "Average Block Time", number: data?.averageBlockTime ?? "N/A" },
     { name: "Latest Block Transactions", number: data?.latestBlockTransactions ?? "N/A" },
-    { name: "POL Supply", number: data?.polSupply ?? "N/A" },
+    { name: "POL Supply", number: formatNumber(data?.polSupply|| 0) ?? "N/A" },
     { name: "Total Blocks", number: isNaN(Number(data?.totalBlocks)) ? "N/A" : data?.totalBlocks },
   ];
 
@@ -76,7 +90,7 @@ const Topcards: React.FC<TopCardsProps> = ({ data, loading }) => {
               <h3 className="font-poppins text-[12px] sm:text-[16px] text-secondary">
                 {card.name}
               </h3>
-              <p className={`font-satoshi ${card.name === "POL Supply" ? "text-[28px] pt-4" : "text-[20px] md:text-[40px]"} whitespace-nowrap overflow-hidden`}>
+              <p className={`font-satoshi text-[20px] md:text-[40px] whitespace-nowrap overflow-hidden`}>
                 {card.number}
               </p>
             </div>
