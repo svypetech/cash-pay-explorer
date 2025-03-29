@@ -14,6 +14,7 @@ const useFetchBlocks = (page: number, limit: number) => {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/blocks?page=${page}&limit=${limit}`);
         setTotalPages(response.data.data.totalPages);
         setBlocks(response.data.data.blocks);
+        console.log("Fetched blocks:", response.data.data.blocks);
       } catch (error) {
         console.error("Failed to fetch blocks:", error);
       } finally {

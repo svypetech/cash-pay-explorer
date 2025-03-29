@@ -10,7 +10,6 @@ const useFetchDashboardStats = () => {
     async function fetchData() {
               try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/dashboardStats`,);
-                console.log(`Fetched data: `, response.data);
                 setData(response.data.data);
               } catch (error) {
                 console.error("Failed to fetch blocks:", error);

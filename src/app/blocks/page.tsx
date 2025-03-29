@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from "react";
 import { useDarkMode } from "../context/DarkModeContext";
-import { getTimeAgo } from "@/src/types/types";
 import BlockCard from "@/src/components/cards/blockCard2";
 import Pagination from "@/src/components/pagination/pagination";
 import useFetchBlocks from "@/src/hooks/blocks";
@@ -42,8 +41,8 @@ const Page = () => {
               return <BlockCardSkeleton key={ind} />
             })
             :
-            blocks.map((val, ind) => { // @ts-ignore
-              return <BlockCard key={ind} blockNo={val.number} noOfTransactions={val.transactions.length.toString()} endTime={getTimeAgo(val.timestamp)} size={val.size} gasLimit={val.gasLimit} gasUsed={val.gasUsed} />
+            blocks.map((block, ind) => { // @ts-ignore
+              return <BlockCard key={ind} block={block} />
             })
           }
         </div>

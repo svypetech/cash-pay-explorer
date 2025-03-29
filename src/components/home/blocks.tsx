@@ -4,7 +4,6 @@ import { useDarkMode } from "../../app/context/DarkModeContext";
 import BlockCard from "../cards/blockCard";
 import Link from "next/link";
 import { Block, getTimeAgo } from "@/src/types/types";
-import { formatDistanceToNow } from "date-fns";
 import BlockCardSkeleton from "../skeletons/block";
 
 interface BlocksProps {
@@ -43,8 +42,8 @@ const Blocks: React.FC<BlocksProps> = ({ blocks, loading }) => {
                                 <BlockCardSkeleton key={index} />
                                 ))}
                             </div> :
-                            blocks.map((val, ind) => { // @ts-ignore
-                                return <BlockCard key={ind} blockNo={val.number} noOfTransactions={val.transactions.length.toString()} endTime={getTimeAgo(val.timestamp)} size={val.size} gasLimit={val.gasLimit} gasUsed={val.gasUsed} />
+                            blocks.map((block, ind) => {
+                                return <BlockCard key={ind} block={block} />
                             })
                     }
                 </div>
