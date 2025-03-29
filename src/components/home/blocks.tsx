@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDarkMode } from "../../app/context/DarkModeContext";
 import BlockCard from "../cards/blockCard";
 import Link from "next/link";
-import { Block, getTimeAgo } from "@/src/types/types";
+import { Block } from "@/src/types/types";
 import BlockCardSkeleton from "../skeletons/block";
 
 interface BlocksProps {

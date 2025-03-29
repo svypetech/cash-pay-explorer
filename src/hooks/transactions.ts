@@ -23,6 +23,7 @@ const useFetchTransactions = (page: number, limit: number) => {
         ]);
 
         if (isMounted.current) {
+          console.log('Current Page Data:', currentPageData.data.data.transactions);
           setTransactions(currentPageData.data.data.transactions);
 
           // If next page contains data, increase total pages
@@ -71,6 +72,7 @@ export function useFetchPendingTransactions(page: number, limit: number) {
         ]);
 
         if (isMounted.current) {
+          console.log('Pending Transactions:', currentPageData.data.data.transactions);
           setTransactions(currentPageData.data.data.transactions);
 
           // If next page contains data, increase total pages

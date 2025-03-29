@@ -3,28 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDarkMode } from "../context/DarkModeContext";
 import TransactionCard from "../../components/cards/transactionCard";
 import Pagination from "@/src/components/pagination/pagination";
-import axios from "axios";
-import useFetchTransactions, { useFetchPendingTransactions } from "@/src/hooks/transactions";
+import { useFetchPendingTransactions } from "@/src/hooks/transactions";
 import TransactionCardSkeleton from "@/src/components/skeletons/transaction";
-
-interface Transaction {
-  blockNumber: string;
-  timeStamp: string;
-  hash: string;
-  from: string;
-  to: string;
-  value: string;
-  contractAddress: string;
-  input: string;
-  type: string;
-  gas: string;
-  gasUsed: string;
-  traceId: string;
-  isError: string;
-  errCode: string;
-}
-
-
 
 const Transactions = () => {
   const { darkMode } = useDarkMode(); // Get dark mode state
@@ -60,8 +40,8 @@ const Transactions = () => {
             Array.from({length: 10}).map((_,ind) => {
               return <TransactionCardSkeleton key={ind} />
             })
-            : transactions.map((val, ind) => {
-              return <TransactionCard key={ind} transactionHash={val.hash} blockNo={val.blockNumber} time={val.timeStamp} fromAddress={val.from} toAddress={val.to} status={"Pending"} />
+            : transactions.map((transaction, ind) => {
+              return <TransactionCard key={ind} transaction={transaction} status={"Pending"} />
             })
           }
         </div>

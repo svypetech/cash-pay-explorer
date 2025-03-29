@@ -1,21 +1,33 @@
 import { formatDistanceStrict } from 'date-fns';
 
 export interface Transaction {
+  blockHash: string;
   blockNumber: string;
-  timeStamp: string;
-  hash: string;
   from: string;
-  to: string;
-  value: string;
-  contractAddress: string;
-  input: string;
-  type: string;
   gas: string;
-  gasUsed: string;
-  traceId: string;
-  isError: string;
-  errCode: string;
+  gasPrice: string;
+  maxFeePerGas: string;
+  maxPriorityFeePerGas: string;
+  hash: string;
+  input: string;
+  nonce: string;
+  to: string;
+  transactionIndex: string;
+  value: string;
+  type: string;
+  accessList?: any[]; 
+  chainId?: string; 
+  v?: string; 
+  r?: string; 
+  s?: string; 
+  timeStamp?: string;
+  contractAddress?: string;
+  gasUsed?: string;
+  traceId?: string;
+  isError?: string;
+  errCode?: string;
 }
+
 
 export interface Block {
   baseFeePerGas: string;
@@ -108,3 +120,4 @@ export const convertTimestamp = (timestamp: string) => {
       percentage,
     };
   };
+

@@ -40,8 +40,8 @@ const Transactions: React.FC<TransactionsProps> = ({ transactions, loading }) =>
                     Array.from({length: 4}).map((_,ind) => {
                         return <TransactionCardSkeleton key={ind} />
                     })
-                    : transactions.map((val,ind) => {
-                        return <TransactionCard key={ind} transactionHash={val.hash} blockNo={val.blockNumber} time={val.timeStamp} fromAddress={val.from} toAddress={val.to} status={"Success"} />
+                    : transactions.map((transaction,ind) => {
+                        return <TransactionCard key={ind} transaction={transaction} status={"Success"} />
                     })
                 }
                 </div>

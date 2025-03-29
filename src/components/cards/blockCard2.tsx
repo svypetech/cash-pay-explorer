@@ -4,30 +4,10 @@ import images from "../../data/images.json"
 import Image from "next/image";
 import { useDarkMode } from "../../app/context/DarkModeContext";
 import { useRouter } from "next/navigation";
-import { getTimeAgo } from "@/src/types/types";
+import { Block, getTimeAgo } from "@/src/types/types";
 
 interface BlockCardProps {
-    block: {
-        baseFeePerGas: string;
-        difficulty: string;
-        extraData: string;
-        gasLimit: string;
-        gasUsed: string;
-        hash: string;
-        logsBloom: string;
-        miner: string;
-        mixHash: string;
-        nonce: string;
-        number: string;
-        parentHash: string;
-        receiptsRoot: string;
-        sha3Uncles: string;
-        size: string;
-        stateRoot: string;
-        timestamp: number;
-        totalDifficulty: string;
-        transactions: string[];
-    };
+    block: Block;
 }
 
 

@@ -3,19 +3,18 @@ import React, { useEffect, useState } from "react";
 import images from "../../data/images.json"
 import Image from "next/image";
 import { useDarkMode } from "../../app/context/DarkModeContext";
+import { getTimeAgo, Transaction } from "@/src/types/types";
+import { useRouter } from "next/navigation";
 
 interface TransactionCardProps {
-  transactionHash: string;
-  blockNo: string;
-  time: string;
-  fromAddress: string;
-  toAddress: string;
-  status: string;
+  transaction: Transaction;
+  status: "Success" | "Pending" | "Failed";
 }
 
-const TransactionCard: React.FC<TransactionCardProps> = ({ transactionHash, blockNo, time, fromAddress, toAddress, status }) => {
+const TransactionCard: React.FC<TransactionCardProps> = ({ transaction, status }) => {
   const { darkMode } = useDarkMode(); // Get dark mode state
   const [showDark, setShowDark] = useState(darkMode);
+  const router = useRouter();
 
   useEffect(() => {
     // Delay state update slightly to enable smooth transition
@@ -33,39 +32,42 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ transactionHash, bloc
               <Image src={showDark ? images.transactionIconDark : images.transactionIconLight} alt="block icon" width={24} height={24} />
             </div>
             <p
-              className={`font-satoshi text-[12px] lg:text-[16px] font-bold 
-      ${showDark ? "text-secondary" : "text-primary"} 
-      w-full max-w-full lg:max-w-130 
-      break-words overflow-hidden overflow-wrap word-break whitespace-pre-wrap`}
+              className={`cursor-pointer font-satoshi text-[12px] lg:text-[16px] font-bold ${showDark ? "text-secondary" : "text-primary"} w-full max-w-full lg:max-w-130 break-words overflow-hidden overflow-wrap word-break whitespace-pre-wrap`}
               style={{ wordBreak: "break-word", overflowWrap: "break-word" }}
+              onClick={() => {
+                const transactionDetails = { transaction, status };
+                const serializedBlock = encodeURIComponent(JSON.stringify(transactionDetails));
+
+                router.push(`/transaction-details?data=${serializedBlock}`);
+              }}
             >
-              {transactionHash}
+              {transaction.hash}
             </p>
           </div>
 
 
           {/* Block No and Time */}
           <div className="flex gap-x-4">
-            <p className={`font-satoshi text-[12px] ${showDark ? "text-white" : "text-gray2"} font-bold`}>Block {blockNo}</p>
-            <p className={`font-satoshi text-[12px] ${showDark ? "text-white/50" : "text-gray2/50"}`}>{time}</p>
+            <p className={`font-satoshi text-[12px] ${showDark ? "text-white" : "text-gray2"} font-bold`}>Block {transaction.blockNumber}</p>
+            <p className={`font-satoshi text-[12px] ${showDark ? "text-white/50" : "text-gray2/50"}`}>{transaction.timeStamp ? getTimeAgo(Number(transaction.timeStamp)) : ""}</p>
           </div>
         </div>
 
         {/* From and To Address */}
         <div className="flex sm:justify-center sm:items-center gap-x-2 sm:gap-x-4 p-4 text-[12px] sm:text-[16px]">
           <div className="relative group cursor-pointer">
-            <p>{fromAddress.slice(0, 8)} ...</p>
+            <p>{transaction.from.slice(0, 8)} ...</p>
             <div className="absolute top-full left-0 w-auto max-w-[150px] sm:max-w-[900px] mt-1 p-2 bg-secondary2 text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 break-words whitespace-normal">
-              {fromAddress}
+              {transaction.from}
             </div>
           </div>
 
           <p className={`${showDark && "text-secondary"}`}> → </p>
 
           <div className="relative group cursor-pointer">
-            <p>{toAddress.slice(0, 8)} ...</p>
+            <p>{transaction.to.slice(0, 8)} ...</p>
             <div className="absolute top-full left-0 w-auto max-w-[150px] sm:max-w-[900px] mt-1 p-2 bg-secondary2 text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 break-words whitespace-normal">
-              {toAddress}
+              {transaction.to}
             </div>
 
           </div>
@@ -78,9 +80,8 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ transactionHash, bloc
             <button className="p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-green text-green2 font-semibold">{status}</button>
           ) : (
             <button className="p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-secondary2 text-skyblue font-semibold">{status}</button>
-          )  
+          )
           }
-          {/* <button className="p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-green text-green2 font-semibold">{status}</button> */}
         </div>
       </div>
     </div>
