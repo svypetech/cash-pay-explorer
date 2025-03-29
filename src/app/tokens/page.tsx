@@ -6,13 +6,7 @@ import Pagination from "@/src/components/pagination/pagination";
 import images from "../../data/images.json"
 import Image from "next/image";
 import useFetchTokens from "@/src/hooks/tokens";
-
-interface Token {
-  name: string;
-  address: string;
-  total_supply: string;
-  holderCount: string;
-}
+import TokenTableSkeleton from "@/src/components/skeletons/token";
 
 const Page = () => {
   const { darkMode } = useDarkMode(); // Get dark mode state
@@ -20,32 +14,13 @@ const Page = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages] = useState(5);
   const [search, setSearch] = useState('');
-  const { tokens:tokens2, totalPages:pages, loading } = useFetchTokens(currentPage, 10);
+  const { tokens , totalPages:pages, loading } = useFetchTokens(currentPage, 10);
 
   useEffect(() => {
     // Delay state update slightly to enable smooth transition
     const timeout = setTimeout(() => setShowDark(darkMode), 100);
     return () => clearTimeout(timeout);
   }, [darkMode]);
-
-  const tokens = [
-    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
-    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
-    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
-    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
-    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
-    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
-    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
-    { name: "USDT Frozen (USDT-FRZN)", address: "0x68D3F7f61eC64Fc1006136EF14Ba84644419A63b", totalSupply: "38,094,001,115 USDT-FRZN", holderCount: "460" },
-  ];
-
-  // if (loading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-screen">
-  //       <p>Loading...</p>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="pb-10 p-6 sm:p-8 md:p-10 lg-20">
@@ -69,7 +44,7 @@ const Page = () => {
 
         </div>
 
-        <div className={` sm:hidden ${showDark ? "bg-darkBg" : "bg-white"} flex items-center w-full gap-x-1 justify-center my-4  border ${showDark ? 'border-borderDark' : 'border-black/20'} rounded-lg`}>
+        <div className={` ${showDark ? "bg-darkBg" : "bg-white"} flex items-center w-full gap-x-1 justify-center my-4  border ${showDark ? 'border-borderDark' : 'border-black/20'} rounded-lg`}>
           <Image src={showDark ? images.searchIconDark : images.searchIconLight} alt="search" width={15} height={15}
             className="m-1 w-4 h-4" />
           <input
@@ -82,7 +57,11 @@ const Page = () => {
 
         </div>
         <div className=" my-4">
-          <TokenTable data={tokens} />
+          {loading ? (
+            <TokenTableSkeleton />
+          ) : (
+            <TokenTable filter={search} tokens={tokens} />
+          )}
         </div>
       </div>
 

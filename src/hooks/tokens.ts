@@ -1,29 +1,49 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { Transaction } from '../types/types';
+import { Token, Transaction } from '../types/types';
 
 const useFetchTokens = (page: number, limit: number) => {
-  const [tokens, setTokens] = useState<Transaction[]>([]);
+  const [tokens, setTokens] = useState<Token[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(page + 1);
+  
+  const isMounted = useRef(true);
 
   useEffect(() => {
+    isMounted.current = true;
+
     async function fetchData() {
       setLoading(true);
+
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/tokens?page=${page}&limit=${limit}`);
-        console.log("RESPONSE: ",response.data);
-        setTotalPages(response.data.data.totalPages);
-        setTokens(response.data.data.blocks);
+        // Fetch current and next page concurrently
+        const [currentPageData, nextPageData] = await Promise.all([
+          axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/tokens?page=${page}&limit=${limit}`),
+          axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/tokens?page=${page + 1}&limit=${limit}`),
+        ]);
+
+        if (isMounted.current) {
+          console.log('Current Page Data:', currentPageData.data.data.blocks);
+          setTokens(currentPageData.data.data.blocks);
+
+          // If next page contains data, increase total pages
+          if (nextPageData.data.data.blocks.length > 0) {
+            setTotalPages(page + 1);
+          }
+        }
       } catch (error) {
-        console.error("Failed to fetch tokens:", error);
+        console.error('Failed to fetch Token:', error);
       } finally {
-        setLoading(false);
+        if (isMounted.current) setLoading(false);
       }
     }
 
     fetchData();
-  }, [page]);
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, [page, limit]);
 
   return { tokens, totalPages, loading };
 };

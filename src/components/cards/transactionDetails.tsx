@@ -25,12 +25,12 @@ export default function TransactionDetails({
 
             <div className="space-y-4">
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Transaction Hash</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Transaction Hash</div>
                     <div className={`max-w-full overflow-hidden break-words ${showDark ? `text-skyblue` : `text-primary`} break-all`}>{transaction.hash}</div>
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Result</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Result</div>
                     {result === "Success" ? (
                         <div className="flex gap-2 ">
                             <img src="/icons/tick-circle.svg" alt="success" className="h-5 w-5" />
@@ -42,7 +42,7 @@ export default function TransactionDetails({
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Status</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Status</div>
                     {status === "Confirmed" ? (
                         <div className={`p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-green text-green2 font-semibold`}>{status}</div>
                     ) : (
@@ -51,54 +51,50 @@ export default function TransactionDetails({
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Timestamp</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Timestamp</div>
                     <div>
                         {timestamp?.timeAgo} | {timestamp?.date} | Confirmed within {timestamp?.confirmationTime}
                     </div>
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Number</div>
-                    <div>{transaction.blockNumber}</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Number</div>
+                    <div className="text-[12px] sm:text-[16px] flex-wrap break-words" >{transaction.blockNumber}</div>
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">To</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">To</div>
                     <div className={`max-w-full overflow-hidden break-words ${showDark ? `text-skyblue` : `text-primary`} break-all`}>{transaction.to}</div>
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">From</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">From</div>
                     <div className={`max-w-full overflow-hidden break-words ${showDark ? `text-skyblue` : `text-primary`} break-all`}>{transaction.from}</div>
                 </div>
                 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Value</div>
-                    <div>{transaction.value ? transaction.value : "N/A"} USDT</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Value</div>
+                    <div className="text-[12px] sm:text-[16px] flex-wrap break-words" >{transaction.value ? (Number(transaction.value) / 10 ** 18).toFixed(2) : "N/A "} Matic</div>
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Gas</div>
-                    <div>{transaction.gas}</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Gas</div>
+                    <div className="text-[12px] sm:text-[16px] flex-wrap break-words" >{transaction.gas}</div>
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Gas Used</div>
-                    <div>{transaction.gasUsed}</div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Gas Used</div>
+                    <div className="text-[12px] sm:text-[16px] flex-wrap break-words" >{transaction.gasUsed}</div>
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Trace Id</div>
-                    <div>
-                        {transaction.traceId}
-                    </div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Trace Id</div>
+                    <div className="text-[12px] sm:text-[16px] flex-wrap break-words" >{transaction.traceId}</div>
                 </div>
 
                 <div className="flex items-start">
-                    <div className="w-32 flex-shrink-0 text-gray-500">Type</div>
-                    <div>
-                        {transaction.type}
-                    </div>
+                    <div className="w-20 sm:w-32 text-[12px] sm:text-[16px] flex-shrink-0 flex-wrap break-words text-gray-500">Type</div>
+                    <div className="text-[12px] sm:text-[16px] flex-wrap break-words" >{transaction.type}</div>
                 </div>
                 
             </div>
