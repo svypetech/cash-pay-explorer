@@ -34,7 +34,7 @@ export default function TransactionDetails({
                     {result === "Success" ? (
                         <div className="flex gap-2 ">
                             <img src="/icons/tick-circle.svg" alt="success" className="h-5 w-5" />
-                            <div className={`text-[12px] sm:text-[16px] rounded-lg text-green2 font-semibold font-[poppins]`}>{result}</div>
+                            <div className={`text-[12px] sm:text-[16px] rounded-lg text-green2 font-semibold`}>{result}</div>
                         </div>
                     ) : (
                         <div className={`p-2 px-4 text-[12px] sm:text-[16px] sm:px-6 rounded-lg bg-secondary2 text-skyblue font-semibold`}>{result}</div>
