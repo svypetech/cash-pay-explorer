@@ -92,29 +92,24 @@ export function useFetchPendingTransactions(page: number, limit: number) {
 
     async function fetchData(retryCount = 0) {
       const maxRetries = 3;
-      const retryDelay = 100; // 2 seconds delay
+      const retryDelay = 2000; // 2 seconds delay
 
       if (retryCount === 0) {
         setLoading(true);
       }
 
       try {
-        // Fetch current and next page concurrently
-        const [currentPageData, nextPageData] = await Promise.all([
-          axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/pendingTransactions?page=${page}&limit=${limit}`),
-          axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/pendingTransactions?page=${page + 1}&limit=${limit}`)
-        ]);
+        // Fetch only current page
+        const currentPageData = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/pendingTransactions?page=${page}&limit=${limit}`);
 
         if (isMounted.current) {
           // Check if transactions is actually an array
-          if (Array.isArray(currentPageData.data.data.transactions) && Array.isArray(nextPageData.data.data.transactions)) {
+          if (Array.isArray(currentPageData.data.data.transactions)) {
             console.log('Pending Transactions:', currentPageData.data.data.transactions);
             setTransactions(currentPageData.data.data.transactions);
-
-            // If next page contains data, increase total pages
-            if (nextPageData.data.data.transactions.length > 0) {
-              setTotalPages(page + 1);
-            }
+            
+            // Always set total pages to page + 1
+            setTotalPages(page + 1);
             setLoading(false);
           } else {
             console.warn('Pending transactions is not an array:', currentPageData.data.data.transactions);
@@ -161,6 +156,7 @@ export function useFetchPendingTransactions(page: number, limit: number) {
   return { transactions, totalPages, loading };
 }
 
+
 export function useFetchDashboardTransactions() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -168,13 +164,13 @@ export function useFetchDashboardTransactions() {
   useEffect(() => {
     async function fetchData(retryCount = 0) {
       const maxRetries = 3;
-      const retryDelay = 100; // 2 seconds delay
+      const retryDelay = 2000; // 2 seconds delay
 
       // Only set loading to true on the first attempt
       if (retryCount === 0) {
         setLoading(true);
       }
-
+      
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/transactions?page=1&limit=4`);
         

@@ -11,14 +11,24 @@ const Transactions = () => {
   const [showDark, setShowDark] = useState(darkMode);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(5);
+  const [error, setError] = useState<string | null>(null);
   const { transactions, loading, totalPages: pages } = useFetchTransactions(currentPage, 10);
 
   useEffect(() => {
-    if (pages) {
-      setTotalPages(pages);
-      console.log("Total Pages: ", pages);
+    // Check if transactions is valid and handle error states
+    if (!loading) {
+      if (!Array.isArray(transactions)) {
+        setError("Failed to load transactions. Please try again later.");
+        setTotalPages(currentPage); // Set total pages to current page
+      } else if (transactions.length === 0) {
+        setError("No transactions found.");
+        setTotalPages(currentPage); // Set total pages to current page
+      } else {
+        setError(null);
+        setTotalPages(pages || currentPage);
+      }
     }
-  }, [pages]);
+  }, [transactions, loading, pages, currentPage]);
 
   useEffect(() => {
     // Delay state update slightly to enable smooth transition
@@ -32,22 +42,43 @@ const Transactions = () => {
         <div className="flex gap-x-2 w-full justify-between items-center">
           <p className="flex-1 font-satoshi text-[20px] md:text-[40px] ">Validated Transactions</p>
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-
         </div>
+        
         <div className="flex flex-col gap-x-3 justify-center my-4">
-          {
-            loading ? 
-            Array.from({length: 10}).map((_,ind) => {
+          {loading ? (
+            Array.from({length: 10}).map((_, ind) => {
               return <TransactionCardSkeleton key={ind} />
             })
-            : transactions.map((transaction, ind) => {
-              // return <TransactionCard key={ind} transactionHash={val.hash} blockNo={val.blockNumber} time={val.timeStamp} fromAddress={val.from} toAddress={val.to} status={"Success"} />
+          ) : error ? (
+            <div className={`flex items-center justify-center p-8 rounded-lg ${showDark ? "bg-gray-800" : "bg-gray-100"}`}>
+              <div className="text-center">
+                <div className={`text-6xl mb-4 ${showDark ? "text-gray-600" : "text-gray-400"}`}>
+                  {error.includes("No transactions") ? "📄" : "⚠️"}
+                </div>
+                <p className={`text-lg font-medium ${showDark ? "text-gray-300" : "text-gray-600"}`}>
+                  {error}
+                </p>
+                {error.includes("Failed to load") && (
+                  <button 
+                    onClick={() => window.location.reload()} 
+                    className={`mt-4 px-4 py-2 rounded-lg transition-colors ${
+                      showDark 
+                        ? "bg-blue-600 hover:bg-blue-700 text-white" 
+                        : "bg-blue-500 hover:bg-blue-600 text-white"
+                    }`}
+                  >
+                    Retry
+                  </button>
+                )}
+              </div>
+            </div>
+          ) : (
+            transactions.map((transaction, ind) => {
               return <TransactionCard key={ind} transaction={transaction} status={"Success"} />
             })
-          }
+          )}
         </div>
       </div>
-
     </div>
   );
 };
