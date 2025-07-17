@@ -12,29 +12,59 @@ const useFetchTransactions = (page: number, limit: number) => {
   useEffect(() => {
     isMounted.current = true;
 
-    async function fetchData() {
-      setLoading(true);
+    async function fetchData(retryCount = 0) {
+      const maxRetries = 3;
+      const retryDelay = 100; // 2 seconds delay
+
+      if (retryCount === 0) {
+        setLoading(true);
+      }
 
       try {
-        // Fetch current and next page concurrently
-        const [currentPageData, nextPageData] = await Promise.all([
-          axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/transactions?page=${page}&limit=${limit}`),
-          axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/transactions?page=${page + 1}&limit=${limit}`),
-        ]);
+        // Fetch only current page
+        const currentPageData = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/transactions?page=${page}&limit=${limit}`);
 
         if (isMounted.current) {
-          console.log('Current Page Data:', currentPageData.data.data.transactions);
-          setTransactions(currentPageData.data.data.transactions);
-
-          // If next page contains data, increase total pages
-          if (nextPageData.data.data.transactions.length > 0) {
+          // Check if transactions is actually an array
+          if (Array.isArray(currentPageData.data.data.transactions)) {
+            console.log('Current Page Data:', currentPageData.data.data.transactions);
+            setTransactions(currentPageData.data.data.transactions);
+            
+            // Always set total pages to page + 1
             setTotalPages(page + 1);
+            setLoading(false);
+          } else {
+            console.warn('Transactions is not an array:', currentPageData.data.data.transactions);
+            
+            if (retryCount < maxRetries) {
+              console.log(`Retrying... Attempt ${retryCount + 1}/${maxRetries}`);
+              setTimeout(() => {
+                fetchData(retryCount + 1);
+              }, retryDelay);
+              return;
+            } else {
+              console.error('Max retries reached. Setting empty array as fallback.');
+              setTransactions([]);
+              setLoading(false);
+            }
           }
         }
       } catch (error) {
         console.error('Failed to fetch transactions:', error);
-      } finally {
-        if (isMounted.current) setLoading(false);
+        
+        if (retryCount < maxRetries) {
+          console.log(`Retrying due to error... Attempt ${retryCount + 1}/${maxRetries}`);
+          setTimeout(() => {
+            fetchData(retryCount + 1);
+          }, retryDelay);
+          return;
+        } else {
+          console.error('Max retries reached after error. Setting empty array as fallback.');
+          if (isMounted.current) {
+            setTransactions([]);
+            setLoading(false);
+          }
+        }
       }
     }
 
@@ -50,7 +80,6 @@ const useFetchTransactions = (page: number, limit: number) => {
 
 export default useFetchTransactions;
 
-
 export function useFetchPendingTransactions(page: number, limit: number) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -61,8 +90,13 @@ export function useFetchPendingTransactions(page: number, limit: number) {
   useEffect(() => {
     isMounted.current = true;
 
-    async function fetchData() {
-      setLoading(true);
+    async function fetchData(retryCount = 0) {
+      const maxRetries = 3;
+      const retryDelay = 100; // 2 seconds delay
+
+      if (retryCount === 0) {
+        setLoading(true);
+      }
 
       try {
         // Fetch current and next page concurrently
@@ -72,18 +106,48 @@ export function useFetchPendingTransactions(page: number, limit: number) {
         ]);
 
         if (isMounted.current) {
-          console.log('Pending Transactions:', currentPageData.data.data.transactions);
-          setTransactions(currentPageData.data.data.transactions);
+          // Check if transactions is actually an array
+          if (Array.isArray(currentPageData.data.data.transactions) && Array.isArray(nextPageData.data.data.transactions)) {
+            console.log('Pending Transactions:', currentPageData.data.data.transactions);
+            setTransactions(currentPageData.data.data.transactions);
 
-          // If next page contains data, increase total pages
-          if (nextPageData.data.data.transactions.length > 0) {
-            setTotalPages(page + 1);
+            // If next page contains data, increase total pages
+            if (nextPageData.data.data.transactions.length > 0) {
+              setTotalPages(page + 1);
+            }
+            setLoading(false);
+          } else {
+            console.warn('Pending transactions is not an array:', currentPageData.data.data.transactions);
+            
+            if (retryCount < maxRetries) {
+              console.log(`Retrying... Attempt ${retryCount + 1}/${maxRetries}`);
+              setTimeout(() => {
+                fetchData(retryCount + 1);
+              }, retryDelay);
+              return;
+            } else {
+              console.error('Max retries reached. Setting empty array as fallback.');
+              setTransactions([]);
+              setLoading(false);
+            }
           }
         }
       } catch (error) {
         console.error("Failed to fetch pending transactions:", error);
-      } finally {
-        if (isMounted.current) setLoading(false);
+        
+        if (retryCount < maxRetries) {
+          console.log(`Retrying due to error... Attempt ${retryCount + 1}/${maxRetries}`);
+          setTimeout(() => {
+            fetchData(retryCount + 1);
+          }, retryDelay);
+          return;
+        } else {
+          console.error('Max retries reached after error. Setting empty array as fallback.');
+          if (isMounted.current) {
+            setTransactions([]);
+            setLoading(false);
+          }
+        }
       }
     }
 
@@ -98,21 +162,57 @@ export function useFetchPendingTransactions(page: number, limit: number) {
 }
 
 export function useFetchDashboardTransactions() {
-
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
+    async function fetchData(retryCount = 0) {
+      const maxRetries = 3;
+      const retryDelay = 100; // 2 seconds delay
+
+      // Only set loading to true on the first attempt
+      if (retryCount === 0) {
+        setLoading(true);
+      }
 
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/explorer/transactions?page=1&limit=4`);
-        setTransactions(response.data.data.transactions);
+        
+        // Check if transactions is actually an array
+        if (Array.isArray(response.data.data.transactions)) {
+          setTransactions(response.data.data.transactions);
+          setLoading(false); // Set loading to false when successful
+        } else {
+          console.warn('Transactions is not an array:', response.data.data.transactions);
+          
+          // If it's a rate limit error and we haven't exceeded max retries
+          if (retryCount < maxRetries) {
+            console.log(`Retrying... Attempt ${retryCount + 1}/${maxRetries}`);
+            setTimeout(() => {
+              fetchData(retryCount + 1);
+            }, retryDelay);
+            return; // Don't set loading to false yet
+          } else {
+            console.error('Max retries reached. Setting empty array as fallback.');
+            setTransactions([]);
+            setLoading(false);
+          }
+        }
       } catch (error) {
         console.error("Failed to fetch dashboard transactions:", error);
-      } finally {
-        setLoading(false);
+        
+        // Retry on network errors too
+        if (retryCount < maxRetries) {
+          console.log(`Retrying due to error... Attempt ${retryCount + 1}/${maxRetries}`);
+          setTimeout(() => {
+            fetchData(retryCount + 1);
+          }, retryDelay);
+          return; // Don't set loading to false yet
+        } else {
+          console.error('Max retries reached after error. Setting empty array as fallback.');
+          setTransactions([]);
+          setLoading(false);
+        }
       }
     }
 
