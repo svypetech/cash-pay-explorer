@@ -9,9 +9,10 @@ import BlockCardSkeleton from "../skeletons/block";
 interface BlocksProps {
     blocks: Block[];
     loading: boolean;
+    error?: string | null;
 }
 
-const Blocks: React.FC<BlocksProps> = ({ blocks, loading }) => {
+const Blocks: React.FC<BlocksProps> = ({ blocks, loading, error }) => {
     const { darkMode } = useDarkMode(); // Get dark mode state
     const [showDark, setShowDark] = useState(darkMode);
 
@@ -20,8 +21,6 @@ const Blocks: React.FC<BlocksProps> = ({ blocks, loading }) => {
         const timeout = setTimeout(() => setShowDark(darkMode), 100);
         return () => clearTimeout(timeout);
     }, [darkMode]);
-
-
 
     return (
         <div className="py-8 p-6 sm:p-10 md:p-20">
@@ -35,20 +34,30 @@ const Blocks: React.FC<BlocksProps> = ({ blocks, loading }) => {
                     </Link>
                 </div>
                 <div className="flex items-center flex-wrap justify-between my-4 gap-4">
-                    {
-                        loading ?
-                            <div className="flex items-center flex-wrap justify-between my-4 gap-2">
-                                {Array.from({ length: 4 }).map((_, index) => (
+                    {loading ? (
+                        <div className="flex items-center flex-wrap justify-between my-4 gap-2">
+                            {Array.from({ length: 4 }).map((_, index) => (
                                 <BlockCardSkeleton key={index} />
-                                ))}
-                            </div> :
-                            blocks.map((block, ind) => {
-                                return <BlockCard key={ind} block={block} />
-                            })
-                    }
+                            ))}
+                        </div>
+                    ) : error ? (
+                        <div className={`w-full flex items-center justify-center p-8 rounded-lg ${showDark ? "bg-gray-800" : "bg-gray-100"}`}>
+                            <div className="text-center">
+                                <div className={`text-4xl mb-2 ${showDark ? "text-gray-600" : "text-gray-400"}`}>
+                                    ⚠️
+                                </div>
+                                <p className={`text-sm font-medium ${showDark ? "text-gray-300" : "text-gray-600"}`}>
+                                    Unable to fetch blocks
+                                </p>
+                            </div>
+                        </div>
+                    ) : (
+                        blocks.map((block, ind) => {
+                            return <BlockCard key={ind} block={block} />
+                        })
+                    )}
                 </div>
             </div>
-
         </div>
     );
 };
